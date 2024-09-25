@@ -1,0 +1,32 @@
+﻿
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #FFF0D1;
+	height: 100vh;
+	width:100vw;
+	display: flex;
+	justify-content:center;
+	align-items: center;
+}
+
+.heading {
+	color: brown;
+	font-size: 4em;
+	margin-bottom: 1em;
+}
+
+
+.nav-link1 {
+	text-decoration: none;
+	font-size: 1em;
+	border: solid;
+	color: white;
+	background-color: brown;
+	padding: 1em;
+	text-align: center;
+	margin-left: 11em;
+}

@@ -1,0 +1,60 @@
+﻿* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #FFF0D1;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.heading-h1 {
+	color: brown;
+	font-size: 2em;
+}
+
+.gridbook {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px 0;
+	text-align: center;
+}
+
+	.gridbook table {
+		border-radius: 0.5rem 0 0.5rem;
+	}
+
+		.gridbook table tr th {
+			background-color: #670505;
+			color: white;
+			padding: 10px;
+			font-size: 1.8em;
+			text-align: center;
+		}
+
+		.gridbook table td {
+			padding: 10px;
+			border-bottom: 1px solid black;
+			text-align: center;
+			font-size: 1.6em;
+		}
+
+		.gridbook table tr:nth-child(even) {
+			background-color: #F7DCB9;
+		}
+
+
+		.gridbook table tr:hover {
+			background-color: #B5C18E;
+		}
+
+input {
+	background-color: #670505;
+	color: white;
+	border: solid #670505;
+	padding: 0.4em;
+	font-size: 0.6em;
+}
