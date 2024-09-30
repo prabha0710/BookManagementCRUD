@@ -1,13 +1,14 @@
-﻿
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Web.UI;
+using BookManagementCRUD.Common.Constant;
+using BookManagementCRUD.Common.Messages;
 
 namespace BookManagementCRUD
 {
-	public partial class AddBooks : System.Web.UI.Page
+	public partial class FirstPage : System.Web.UI.Page
 	{
+		string connectionString = ConnectionStringValues.ConnectionString;
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if(!IsPostBack)
@@ -26,7 +27,7 @@ namespace BookManagementCRUD
 
 		private void LoadBookDetails(int bookId)
 		{
-			using(SqlConnection con = new SqlConnection("data source=.;database=Book;integrated security=SSPI"))
+			using(SqlConnection con = new SqlConnection(connectionString))
 			{
 				try
 				{
@@ -46,14 +47,14 @@ namespace BookManagementCRUD
 				}
 				catch(Exception ex)
 				{
-					Label1.Text = "Error loading book details: " + ex.Message;
+					Label1.Text = ErrorMessage.ErrorLoadBooks + ex.Message;
 				}
 			}
 		}
 
 		private void CreateBookTable()
 		{
-			string connectionString = "data source=.;database=Book;integrated security=SSPI";
+		
 			string createTableQuery =
 				@"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Book' AND xtype='U')
                 CREATE TABLE Book(
@@ -72,17 +73,18 @@ namespace BookManagementCRUD
 					con.Open();
 					SqlCommand cmd = new SqlCommand(createTableQuery, con);
 					cmd.ExecuteNonQuery();
+					
 				}
 				catch(Exception ex)
 				{
-					Label1.Text = "Error creating table: " + ex.Message;
+					con.Close();
 				}
 			}
 		}
 
-		protected void btnSave_Click(object sender, EventArgs e)
+		protected void InsertBookRecord(object sender, EventArgs e)
 		{
-			string connectionString = "data source=.;database=Book;integrated security=SSPI";
+			
 			string[] dataToInsert = new string[6];
 			dataToInsert[0] = txtBookName.Text;
 			dataToInsert[1] = txtAuthorName.Text;
@@ -93,7 +95,7 @@ namespace BookManagementCRUD
 
 			if(Array.Exists(dataToInsert, string.IsNullOrEmpty))
 			{
-				Label1.Text = "Please fill in all text boxes.";
+				Label1.Text = ErrorMessage.EmptyTextBox;
 				return;
 			}
 
@@ -119,17 +121,17 @@ namespace BookManagementCRUD
 
 					dataTable.Rows.Add(newRow);
 					dataAdapter.Update(dataTable);
-					Label1.Text = "Book Details Saved Sucessfully in Database";
-					ClearFields();
+					Label1.Text = SuccessMessages.BookDetailsSave_Message;
+					ClearTextBoxFields();
 				}
 				catch(Exception ex)
 				{
-					Label1.Text = "Data insertion failed: " + ex.Message;
+					Label1.Text = ErrorMessage.DataInsertionFailed + ex.Message;
 				}
 			}
 		}
 
-		private void ClearFields()
+		private void ClearTextBoxFields()
 		{
 			txtBookName.Text = "";
 			txtAuthorName.Text = "";
@@ -139,11 +141,11 @@ namespace BookManagementCRUD
 			txtLanguage.Text = "";
 		}
 
-		protected void btnUpdate_Click(object sender, EventArgs e)
+		protected void UpdateBookDetails(object sender, EventArgs e)
 		{
 			int bookId = Convert.ToInt32(Request.QueryString["Id"]);
-
-			using(SqlConnection con = new SqlConnection("data source=.;database=Book;integrated security=SSPI"))
+		
+			using(SqlConnection con = new SqlConnection(connectionString))
 			{
 				SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM Book WHERE Id = @Id", con);
 				dataAdapter.SelectCommand.Parameters.AddWithValue("@Id", bookId);
@@ -163,15 +165,15 @@ namespace BookManagementCRUD
 					row["Language"] = txtLanguage.Text;
 
 					dataAdapter.Update(dataTable);
-					Label1.Text = "Data updated successfully in Database";
+					Label1.Text = SuccessMessages.UpdateBook_Message;
 					Response.Redirect("GridViewPage.aspx");
 				}
 			}
 		}
 
-		protected void btnViewBooks_Click(object sender, EventArgs e)
+		protected void RetrieveBookDetails(object sender, EventArgs e)
 		{
-			Response.Redirect("GridViewPage.aspx");
+			Response.Redirect("~/WebPages/GridViewPage.aspx");
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace BookManagementCRUD
 {
 
 
-	public partial class AddBooks
+	public partial class FirstPage
 	{
 
 		/// <summary>
