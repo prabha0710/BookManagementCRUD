@@ -30,16 +30,13 @@ body {
 	background-color: #FFF0D1;
 	color: brown;
 }
-
 .label {
 	font-size: 1.4rem;
 	color: white;
 }
-
 .input-group {
 	padding: 0.2rem;
 }
-
 .buttonsave {
 	background: #FFF0D1;
 	color: brown;
@@ -47,7 +44,6 @@ body {
 	border: solid;
 	border-radius: 0.5rem 0 0.5rem;
 }
-
 .message {
 	color: #FFF0D1;
 }
