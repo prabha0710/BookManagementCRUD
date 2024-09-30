@@ -119,7 +119,7 @@ namespace BookManagementCRUD
 
 					dataTable.Rows.Add(newRow);
 					dataAdapter.Update(dataTable);
-					Label1.Text = "Data inserted successfully.";
+					Label1.Text = "Book Details Saved Sucessfully in Database";
 					ClearFields();
 				}
 				catch(Exception ex)
@@ -141,28 +141,30 @@ namespace BookManagementCRUD
 
 		protected void btnUpdate_Click(object sender, EventArgs e)
 		{
+			int bookId = Convert.ToInt32(Request.QueryString["Id"]);
+
 			using(SqlConnection con = new SqlConnection("data source=.;database=Book;integrated security=SSPI"))
 			{
-				try
-				{
-					con.Open();
-					SqlCommand cmd = new SqlCommand(
-						"UPDATE Book SET BookName = @BookName, AuthorName = @AuthorName, BookCount = @BookCount, PublicationYear = @PublicationYear, ISBN = @ISBN, Language = @Language WHERE Id = @Id",
-						con);
-					cmd.Parameters.AddWithValue("@BookName", txtBookName.Text);
-					cmd.Parameters.AddWithValue("@AuthorName", txtAuthorName.Text);
-					cmd.Parameters.AddWithValue("@BookCount", txtBookCount.Text);
-					cmd.Parameters.AddWithValue("@PublicationYear", txtPublicationYear.Text);
-					cmd.Parameters.AddWithValue("@ISBN", txtISBN.Text);
-					cmd.Parameters.AddWithValue("@Language", txtLanguage.Text);
-					cmd.Parameters.AddWithValue("@Id", Request.QueryString["Id"]);
+				SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM Book WHERE Id = @Id", con);
+				dataAdapter.SelectCommand.Parameters.AddWithValue("@Id", bookId);
 
-					cmd.ExecuteNonQuery();
-					Response.Redirect("GridViewPage.aspx");
-				}
-				catch(Exception ex)
+				SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(dataAdapter);
+				DataTable dataTable = new DataTable();
+				dataAdapter.Fill(dataTable);
+
+				if(dataTable.Rows.Count > 0)
 				{
-					Label1.Text = "Error updating record: " + ex.Message;
+					DataRow row = dataTable.Rows[0];
+					row["BookName"] = txtBookName.Text;
+					row["AuthorName"] = txtAuthorName.Text;
+					row["BookCount"] = txtBookCount.Text;
+					row["PublicationYear"] = txtPublicationYear.Text;
+					row["ISBN"] = txtISBN.Text;
+					row["Language"] = txtLanguage.Text;
+
+					dataAdapter.Update(dataTable);
+					Label1.Text = "Data updated successfully in Database";
+					Response.Redirect("GridViewPage.aspx");
 				}
 			}
 		}
