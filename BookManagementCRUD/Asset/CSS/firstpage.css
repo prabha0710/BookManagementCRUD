@@ -17,7 +17,7 @@ body {
 	padding: 4rem;
 	font-size: 1.3rem;
 	border-radius: 2rem 0 2rem;
-	width:20em;
+	width: 20em;
 }
 
 .textbox {
@@ -30,13 +30,16 @@ body {
 	background-color: #FFF0D1;
 	color: brown;
 }
+
 .label {
 	font-size: 1.4rem;
 	color: white;
 }
+
 .input-group {
 	padding: 0.2rem;
 }
+
 .buttonsave {
 	background: #FFF0D1;
 	color: brown;
@@ -44,6 +47,7 @@ body {
 	border: solid;
 	border-radius: 0.5rem 0 0.5rem;
 }
+
 .message {
 	color: #FFF0D1;
 }

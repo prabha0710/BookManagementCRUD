@@ -99,14 +99,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Asset\CSS\firstpage.css" />
-    <Content Include="Asset\CSS\gridview.css" />
+    <Content Include="Asset\CSS\FirstPage.css" />
+    <Content Include="Asset\CSS\GridView.css" />
     <Content Include="Asset\CSS\Main.css" />
-    <Content Include="Default.aspx" />
+    <Content Include="WebPages\Default.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="FirstPage.aspx" />
+    <Content Include="WebPages\FirstPage.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="GridViewPage.aspx" />
+    <Content Include="WebPages\GridViewPage.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -120,6 +120,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Notes.md" />
+    <Content Include="EntityFramwork.md" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -156,28 +157,33 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Default.aspx.cs">
+    <Compile Include="Common\Constant\ConnectionStringValues.cs" />
+    <Compile Include="Common\DataTransferObjects\CommonDTOs.cs" />
+    <Compile Include="Common\Messages\ErrorMessage.cs" />
+    <Compile Include="Common\Messages\SuccessMessages.cs" />
+    <Compile Include="Common\Methods\Methods.cs" />
+    <Compile Include="WebPages\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
+    <Compile Include="WebPages\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FirstPage.aspx.cs">
+    <Compile Include="WebPages\FirstPage.aspx.cs">
       <DependentUpon>FirstPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FirstPage.aspx.designer.cs">
+    <Compile Include="WebPages\FirstPage.aspx.designer.cs">
       <DependentUpon>FirstPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="GridViewPage.aspx.cs">
+    <Compile Include="WebPages\GridViewPage.aspx.cs">
       <DependentUpon>GridViewPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GridViewPage.aspx.designer.cs">
+    <Compile Include="WebPages\GridViewPage.aspx.designer.cs">
       <DependentUpon>GridViewPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
