@@ -33,7 +33,6 @@ namespace BookManagementCRUD
 			}
 			finally
 			{
-
 				con.Close();
 			}
 		}
