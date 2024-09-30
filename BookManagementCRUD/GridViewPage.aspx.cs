@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -39,47 +40,38 @@ namespace BookManagementCRUD
 
 		protected void gvBooks_RowCommand(object sender, GridViewCommandEventArgs e)
 		{
-			try
-			{
-				int rowIndex = Convert.ToInt32(e.CommandArgument);
-				GridViewRow row = gvBooks.Rows[rowIndex];
-				int bookId = Convert.ToInt32(gvBooks.DataKeys[rowIndex].Value);
+			int rowIndex = Convert.ToInt32(e.CommandArgument);
+			int bookId = Convert.ToInt32(gvBooks.DataKeys[rowIndex].Value);
 
-				if(e.CommandName == "EditBook")
-				{
-					Response.Redirect("FirstPage.aspx?Id=" + bookId);
-				}
-				else if(e.CommandName == "DeleteBook")
-				{
-					DeleteBook(bookId);
-				}
-			}
-			catch(Exception ex)
+			if(e.CommandName == "EditBook")
 			{
-				lblMessage.Text = "Error handling row command: " + ex.Message;
+				Response.Redirect("Firstpage.aspx?Id=" + bookId);
+			}
+			else if(e.CommandName == "DeleteBook")
+			{
+				DeleteBook(bookId);
 			}
 		}
 
 		private void DeleteBook(int bookId)
 		{
-			SqlConnection con = null;
-			try
+			using(SqlConnection con = new SqlConnection("data source=.;database=Book;integrated security=SSPI"))
 			{
-				con = new SqlConnection("data source=.;database=Book;integrated security=SSPI");
-				con.Open();
-				SqlCommand cmd = new SqlCommand("DELETE FROM Book WHERE Id = @Id", con);
-				cmd.Parameters.AddWithValue("@Id", bookId);
-				cmd.ExecuteNonQuery();
-				LoadBooks();
-			}
-			catch(Exception ex)
-			{
-				lblMessage.Text = "Error deleting book: " + ex.Message;
-			}
-			finally
-			{
+				SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM Book WHERE Id = @Id", con);
+				dataAdapter.SelectCommand.Parameters.AddWithValue("@Id", bookId);
 
-				con.Close();
+				SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(dataAdapter);
+				DataTable dataTable = new DataTable();
+				dataAdapter.Fill(dataTable);
+
+				if(dataTable.Rows.Count > 0)
+				{
+					DataRow row = dataTable.Rows[0];
+					row.Delete();
+
+					dataAdapter.Update(dataTable);
+					LoadBooks();
+				}
 			}
 		}
 	}
