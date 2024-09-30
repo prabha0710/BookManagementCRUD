@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
 
@@ -57,7 +58,7 @@ namespace BookManagementCRUD
 				@"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Book' AND xtype='U')
                 CREATE TABLE Book(
                 Id INT IDENTITY(1,1) PRIMARY KEY,
-                BookName VARCHAR(100),
+                BookName VARCHAR(100),                    
                 AuthorName VARCHAR(100),
                 BookCount INT,
                 PublicationYear INT,
@@ -81,29 +82,49 @@ namespace BookManagementCRUD
 
 		protected void btnSave_Click(object sender, EventArgs e)
 		{
-			using(SqlConnection con = new SqlConnection("data source=.;database=Book;integrated security=SSPI"))
+			string connectionString = "data source=.;database=Book;integrated security=SSPI";
+			string[] dataToInsert = new string[6];
+			dataToInsert[0] = txtBookName.Text;
+			dataToInsert[1] = txtAuthorName.Text;
+			dataToInsert[2] = txtBookCount.Text;
+			dataToInsert[3] = txtPublicationYear.Text;
+			dataToInsert[4] = txtISBN.Text;
+			dataToInsert[5] = txtLanguage.Text;
+
+			if(Array.Exists(dataToInsert, string.IsNullOrEmpty))
+			{
+				Label1.Text = "Please fill in all text boxes.";
+				return;
+			}
+
+			using(SqlConnection con = new SqlConnection(connectionString))
 			{
 				try
 				{
 					con.Open();
-					SqlCommand cmd = new SqlCommand(
-						"INSERT INTO Book (BookName, AuthorName, BookCount, PublicationYear, ISBN, Language) VALUES (@BookName, @AuthorName, @BookCount, @PublicationYear, @ISBN, @Language)",
-						con);
-					cmd.Parameters.AddWithValue("@BookName", txtBookName.Text);
-					cmd.Parameters.AddWithValue("@AuthorName", txtAuthorName.Text);
-					cmd.Parameters.AddWithValue("@BookCount", txtBookCount.Text);
-					cmd.Parameters.AddWithValue("@PublicationYear", txtPublicationYear.Text);
-					cmd.Parameters.AddWithValue("@ISBN", txtISBN.Text);
-					cmd.Parameters.AddWithValue("@Language", txtLanguage.Text);
-					int status = cmd.ExecuteNonQuery();
+					string selectCommand = "SELECT * FROM Book";
+					SqlDataAdapter dataAdapter = new SqlDataAdapter(selectCommand, con);
+					SqlCommandBuilder builder = new SqlCommandBuilder(dataAdapter);
 
-					if(status > 0)
-						Label1.Text = "Record saved successfully!";
+					DataTable dataTable = new DataTable();
+					dataAdapter.Fill(dataTable);
+
+					DataRow newRow = dataTable.NewRow();
+					newRow["BookName"] = dataToInsert[0];
+					newRow["AuthorName"] = dataToInsert[1];
+					newRow["BookCount"] = dataToInsert[2];
+					newRow["PublicationYear"] = dataToInsert[3];
+					newRow["ISBN"] = dataToInsert[4];
+					newRow["Language"] = dataToInsert[5];
+
+					dataTable.Rows.Add(newRow);
+					dataAdapter.Update(dataTable);
+					Label1.Text = "Data inserted successfully.";
 					ClearFields();
 				}
 				catch(Exception ex)
 				{
-					Label1.Text = "Error saving record: " + ex.Message;
+					Label1.Text = "Data insertion failed: " + ex.Message;
 				}
 			}
 		}
