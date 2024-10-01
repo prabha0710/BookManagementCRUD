@@ -156,9 +156,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-<<<<<<< Updated upstream
     <Compile Include="Default.aspx.cs">
-=======
     <Compile Include="BusinessLogicLayer\BookBL\BookBL.cs" />
     <Compile Include="BusinessLogicLayer\ValidationBL\InputValidationBL.cs" />
     <Compile Include="CommonLayer\Constant\ConnectionStringValues.cs" />
@@ -167,7 +165,6 @@
     <Compile Include="CommonLayer\Messages\SuccessMessages.cs" />
     <Compile Include="DataAccessLayer\BookDAL.cs" />
     <Compile Include="WebPages\Default.aspx.cs">
->>>>>>> Stashed changes
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
