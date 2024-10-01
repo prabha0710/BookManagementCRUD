@@ -42,29 +42,14 @@
                 <asp:TextBox class="textbox" ID="txtLanguage" runat="server"></asp:TextBox><br />
                 <asp:RequiredFieldValidator ErrorMessage="Please Enter a language" ControlToValidate="txtLanguage" runat="server" ID="validatorLanguage" />
             </div>
-<<<<<<< Updated upstream:BookManagementCRUD/FirstPage.aspx
             <div class="button-save"> 
                  <asp:Button ID="btnSave"  class=buttonsave runat="server" Text="Save" OnClick="btnSave_Click" />
- <asp:Button ID="btnUpdate"  class=buttonsave runat="server" Text="Update" OnClick="btnUpdate_Click" Visible="false" />
- <asp:Button ID="btnViewBooks" class=buttonsave runat="server" Text="View Books" OnClick="btnViewBooks_Click" />
-=======
-            <div class="button-save">
-                <asp:Button ID="btnSave" class="buttonsave" runat="server" Text="Save" OnClick="InsertBookRecord" />
-                <asp:Button ID="btnUpdate" class="buttonsave" runat="server" Text="Update" OnClick="UpdateBookDetails" Visible="false" />
-                  <asp:Button ID="btnViewBooks" class="buttonsave" runat="server" Text="View Books" OnClick="RetrieveBookDetails" />
-               
->>>>>>> Stashed changes:BookManagementCRUD/WebPages/FirstPage.aspx
-                <div class="message">
-                    <asp:Label ID="Label1" runat="server" />
-                </div>
-                
+                 <asp:Button ID="btnUpdate"  class=buttonsave runat="server" Text="Update" OnClick="btnUpdate_Click" Visible="false" />
+                 <asp:Button ID="btnViewBooks" class=buttonsave runat="server" Text="View Books" OnClick="btnViewBooks_Click" />
             </div>
-<<<<<<< Updated upstream:BookManagementCRUD/FirstPage.aspx
-           
-=======
-            
->>>>>>> Stashed changes:BookManagementCRUD/WebPages/FirstPage.aspx
+            <div class="message">
+                <asp:Label ID="Label1" runat="server" />
+            </div>
         </div>
-       
     </main>
 </asp:Content>
