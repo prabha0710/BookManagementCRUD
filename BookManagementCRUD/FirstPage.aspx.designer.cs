@@ -24,6 +24,15 @@ namespace BookManagementCRUD
 		protected global::System.Web.UI.WebControls.TextBox txtBookName;
 
 		/// <summary>
+		/// ValidatorTxtBook control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidatorTxtBook;
+
+		/// <summary>
 		/// txtAuthorName control.
 		/// </summary>
 		/// <remarks>
@@ -31,6 +40,15 @@ namespace BookManagementCRUD
 		/// To modify move field declaration from designer file to code-behind file.
 		/// </remarks>
 		protected global::System.Web.UI.WebControls.TextBox txtAuthorName;
+
+		/// <summary>
+		/// validatorAuthor control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.RequiredFieldValidator validatorAuthor;
 
 		/// <summary>
 		/// txtBookCount control.
@@ -42,6 +60,15 @@ namespace BookManagementCRUD
 		protected global::System.Web.UI.WebControls.TextBox txtBookCount;
 
 		/// <summary>
+		/// validatorCount control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.RequiredFieldValidator validatorCount;
+
+		/// <summary>
 		/// txtPublicationYear control.
 		/// </summary>
 		/// <remarks>
@@ -49,6 +76,15 @@ namespace BookManagementCRUD
 		/// To modify move field declaration from designer file to code-behind file.
 		/// </remarks>
 		protected global::System.Web.UI.WebControls.TextBox txtPublicationYear;
+
+		/// <summary>
+		/// validatorYear control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.RequiredFieldValidator validatorYear;
 
 		/// <summary>
 		/// txtISBN control.
@@ -60,6 +96,15 @@ namespace BookManagementCRUD
 		protected global::System.Web.UI.WebControls.TextBox txtISBN;
 
 		/// <summary>
+		/// validatorISBN control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.RequiredFieldValidator validatorISBN;
+
+		/// <summary>
 		/// txtLanguage control.
 		/// </summary>
 		/// <remarks>
@@ -67,6 +112,15 @@ namespace BookManagementCRUD
 		/// To modify move field declaration from designer file to code-behind file.
 		/// </remarks>
 		protected global::System.Web.UI.WebControls.TextBox txtLanguage;
+
+		/// <summary>
+		/// validatorLanguage control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.RequiredFieldValidator validatorLanguage;
 
 		/// <summary>
 		/// btnSave control.

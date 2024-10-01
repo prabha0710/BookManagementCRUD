@@ -42,6 +42,36 @@ Otherwise, it throws an InvalidOperationException
 because it needs a way to identify which rows in the
 database should be updated.**
 
+## 3. Validation Controls
+
+### => The RequiredFieldValidator Control 
+
+**Ensures that the user does 
+not skip a mandatory entry field .**
+
+### => The CompareValidator Control 
+
+**Compares one controls value with another
+controls value, constants and data type using a
+comparison operator
+(equals, greater than, less than, and so on).**
+### => The RangeValidator Control 
+
+**Checks the user's input is in a given range
+(eg: numbers or characters).**
+### => The RegularExpressionValidator Control 
+
+**Checks that the user's entry matches a pattern 
+defined by a regular expression.**
+### => The CustomValidator Control 
+
+**Checks the user's entry 
+using custom-coded validation logic.**
+### =>The ValidationSummary Control 
+
+**Displays a summary of all validation errors 
+inline on a web page, in a message box, or both.**
+
 
 
 

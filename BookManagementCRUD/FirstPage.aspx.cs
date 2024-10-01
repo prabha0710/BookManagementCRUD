@@ -1,13 +1,25 @@
 ﻿
 using System;
 using System.Data;
+<<<<<<< Updated upstream:BookManagementCRUD/FirstPage.aspx.cs
 using System.Data.SqlClient;
 using System.Web.UI;
+=======
+using BookManagementCRUD.CommonLayer.Constant;
+using BookManagementCRUD.CommonLayer.Messages;
+using BookManagementCRUD.BusinessLogicLayer.BookBL;
+
+>>>>>>> Stashed changes:BookManagementCRUD/WebPages/FirstPage.aspx.cs
 
 namespace BookManagementCRUD
 {
 	public partial class AddBooks : System.Web.UI.Page
 	{
+<<<<<<< Updated upstream:BookManagementCRUD/FirstPage.aspx.cs
+=======
+		private BookBL bookBL = new BookBL();
+		string connectionString = ConnectionStringValues.ConnectionString;
+>>>>>>> Stashed changes:BookManagementCRUD/WebPages/FirstPage.aspx.cs
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if(!IsPostBack)
@@ -24,8 +36,9 @@ namespace BookManagementCRUD
 			CreateBookTable();
 		}
 
-		private void LoadBookDetails(int bookId)
+		protected void LoadBookDetails(int bookId)
 		{
+<<<<<<< Updated upstream:BookManagementCRUD/FirstPage.aspx.cs
 			using(SqlConnection con = new SqlConnection("data source=.;database=Book;integrated security=SSPI"))
 			{
 				try
@@ -48,11 +61,25 @@ namespace BookManagementCRUD
 				{
 					Label1.Text = "Error loading book details: " + ex.Message;
 				}
+=======
+			DataTable dataTable = bookBL.LoadBookDetails(bookId);
+
+			if(dataTable.Rows.Count > 0)
+			{
+				DataRow row = dataTable.Rows[0];
+				txtBookName.Text = row["BookName"].ToString();
+				txtAuthorName.Text = row["AuthorName"].ToString();
+				txtBookCount.Text = row["BookCount"].ToString();
+				txtPublicationYear.Text = row["PublicationYear"].ToString();
+				txtISBN.Text = row["ISBN"].ToString();
+				txtLanguage.Text = row["Language"].ToString();
+>>>>>>> Stashed changes:BookManagementCRUD/WebPages/FirstPage.aspx.cs
 			}
 		}
 
 		private void CreateBookTable()
 		{
+<<<<<<< Updated upstream:BookManagementCRUD/FirstPage.aspx.cs
 			string connectionString = "data source=.;database=Book;integrated security=SSPI";
 			string createTableQuery =
 				@"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Book' AND xtype='U')
@@ -78,10 +105,14 @@ namespace BookManagementCRUD
 					Label1.Text = "Error creating table: " + ex.Message;
 				}
 			}
+=======
+			bookBL.CreateBookTable();
+>>>>>>> Stashed changes:BookManagementCRUD/WebPages/FirstPage.aspx.cs
 		}
 
 		protected void btnSave_Click(object sender, EventArgs e)
 		{
+<<<<<<< Updated upstream:BookManagementCRUD/FirstPage.aspx.cs
 			string connectionString = "data source=.;database=Book;integrated security=SSPI";
 			string[] dataToInsert = new string[6];
 			dataToInsert[0] = txtBookName.Text;
@@ -127,6 +158,22 @@ namespace BookManagementCRUD
 					Label1.Text = "Data insertion failed: " + ex.Message;
 				}
 			}
+=======
+			try
+			{
+				string[] dataToInsert = { txtBookName.Text,  txtAuthorName.Text,
+								txtBookCount.Text, txtPublicationYear.Text,
+								txtISBN.Text,      txtLanguage.Text };
+				bookBL.InsertBook(dataToInsert);
+				Label1.Text = SuccessMessages.BookDetailsSave_Message;
+				ClearTextBoxFields();
+			}
+			catch
+			{
+				Label1.Text = ErrorMessage.DataInsertionFailed;
+			}
+			
+>>>>>>> Stashed changes:BookManagementCRUD/WebPages/FirstPage.aspx.cs
 		}
 
 		private void ClearFields()
@@ -141,6 +188,7 @@ namespace BookManagementCRUD
 
 		protected void btnUpdate_Click(object sender, EventArgs e)
 		{
+<<<<<<< Updated upstream:BookManagementCRUD/FirstPage.aspx.cs
 			int bookId = Convert.ToInt32(Request.QueryString["Id"]);
 
 			using(SqlConnection con = new SqlConnection("data source=.;database=Book;integrated security=SSPI"))
@@ -166,7 +214,23 @@ namespace BookManagementCRUD
 					Label1.Text = "Data updated successfully in Database";
 					Response.Redirect("GridViewPage.aspx");
 				}
+=======
+			try
+			{
+				int bookId = Convert.ToInt32(Request.QueryString["Id"]);
+				string[] dataToUpdate = { txtBookName.Text,  txtAuthorName.Text,
+								txtBookCount.Text, txtPublicationYear.Text,
+								txtISBN.Text,      txtLanguage.Text };
+				bookBL.UpdateBook(bookId, dataToUpdate);
+				Label1.Text = SuccessMessages.UpdateBook_Message;
+				ClearTextBoxFields();
+>>>>>>> Stashed changes:BookManagementCRUD/WebPages/FirstPage.aspx.cs
 			}
+			catch
+			{
+				Label1.Text = ErrorMessage.UpdateDatafailed;
+			}
+			
 		}
 
 		protected void btnViewBooks_Click(object sender, EventArgs e)
