@@ -1,6 +1,6 @@
 ﻿namespace BookManagementCRUD.Common.Messages
 {
-		public static class ErrorMessage
+	    public static class ErrorMessage
 	    {
 		#region Fields
 		public static string DataInsertionFailed => "Data insertion into Database failed ! Kindly Check";
